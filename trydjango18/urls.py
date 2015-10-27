@@ -19,8 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^home/', 'newsletter.views.home'),
-    url(r'^contact/', 'newsletter.views.contact'),
+    url(r'^$', 'newsletter.views.home', name='home'),
+    url(r'^contact/', 'newsletter.views.contact', name='contact'),
+    url(r'^about/', 'trydjango18.views.about', name='about'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 

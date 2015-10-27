@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'modalityapps@gmail.com'
+EMAIL_HOST_PASSWORD = 'Schlingel1'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -37,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'newsletter',
 )
 
@@ -113,8 +119,8 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_venv", "media_root")
 
-
-
+# 3rd Party App Settings
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 

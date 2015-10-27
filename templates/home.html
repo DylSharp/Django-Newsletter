@@ -1,15 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-    <form method="POST" action="">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Sign Up"/>
-    </form>
+{% block head_title %}Welcome |{% endblock %}
 
-</body>
-</html>
+
+{% block jumbotron %}
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <!-- Main component for a primary marketing message or call to action -->
+
+                    <h1>Django Newsletter</h1>
+                    <p>A bit of practise building Django apps!</p>
+                    <p>
+                    <a class="btn btn-lg btn-primary" href="" role="button">Join us</a>
+                    </p>
+
+            </div>
+            <div class="cl-xs-6 col-sm-6" style="background-color: black;height: 300px;"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3 col-xs-2 pull-right">
+            <p class="lead text-align-center">Welcome</p>
+            <form method="POST" action="">{% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-default" type="submit" value="Sign Up"/>
+            </form>
+        </div>
+        <div class="lead text-align-center col-sm-3 col-xs-4">
+            <p>Built with Django &amp; Bootstrap</p>
+        </div>
+        <div class="lead text-align-center col-sm-3 col-xs-4">
+            <p>Created for Starters of all kinds</p>
+        </div>
+        <div class="lead text-align-center col-sm-3 col-xs-2">
+            <p>Always open source</p>
+        </div>
+    </div>
+{% endblock %}
+
