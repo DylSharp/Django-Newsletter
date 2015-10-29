@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{%  load staticfiles %}
 {% load crispy_forms_tags %}
 
 {% block head_title %}Welcome |{% endblock %}
 
 
 {% block jumbotron %}
+{% if not request.user.is_staff%}
     <div class="jumbotron">
         <div class="row">
             <div class="col-xs-6 col-sm-6">
@@ -17,12 +19,41 @@
                     </p>
 
             </div>
-            <div class="cl-xs-6 col-sm-6" style="background-color: black;height: 300px;"></div>
+            <div class="cl-xs-6 col-sm-6">
+                <img class="img-responsive" width="560" height="315" src=" {% static 'img/django-logo.png' %}" frameborder="0" allowfullscreen>
+            </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}
 
 {% block content %}
+{% if request.user.is_authenticated and request.user.is_staff%}
+    <h1>You are logged in</h1>
+    <h2>Welcome staff</h2>
+    <br/>
+    <h3>Signups:</h3>
+
+<div class="table-responsive">
+            <table class="table table-bordered table-hover">
+            <tr style="font-weight: bold">
+                <td>#</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Time Since Signup</td>
+            </tr>
+                {% for instance in queryset %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'profile' instance.id %}">{{ instance.full_name }}</a></td>
+                    <td>{{ instance.email }}</td>
+                    <td>{{ instance.timestamp|timesince }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+</div>
+
+    {% else %}
     <div class="row">
         <div class="col-sm-3 col-xs-2 pull-right">
             <p class="lead text-align-center">Welcome</p>
@@ -41,5 +72,6 @@
             <p>Always open source</p>
         </div>
     </div>
-{% endblock %}
 
+{% endif %}
+{% endblock %}

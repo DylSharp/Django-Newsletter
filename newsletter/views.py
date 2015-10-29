@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm, SignUpForm
+from .models import SignUp
 
 
 def home(request):
@@ -28,6 +29,12 @@ def home(request):
         context = {
             'title': 'Thank you'
         }
+
+    if request.user.is_authenticated() and request.user.is_staff:
+        context = {
+            "queryset": SignUp.objects.all().order_by('-timestamp')
+        }
+
     return render(request, "home.html", context)
 
 
@@ -52,3 +59,11 @@ def contact(request):
         'form': form,
     }
     return  render(request, 'forms.html', context)
+
+
+def profile(request, user_id):
+
+    context = {
+        'profile': SignUp.objects.get(id=user_id),
+    }
+    return render(request, 'profile.html', context)

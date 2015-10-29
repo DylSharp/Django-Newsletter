@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^$', 'newsletter.views.home', name='home'),
     url(r'^contact/', 'newsletter.views.contact', name='contact'),
     url(r'^about/', 'trydjango18.views.about', name='about'),
+    url(r'^profile/([0-9]+)/$', 'newsletter.views.profile', name='profile'),
+
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]
 
 if settings.DEBUG:
